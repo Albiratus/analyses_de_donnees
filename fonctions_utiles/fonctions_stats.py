@@ -4,15 +4,6 @@ from variables.variables import TEMP, HUMIDITY
 #  HUMIDITY est l'humidité relative triee
 
 
-def humidex(date_a, date_b):
-    indices_humidex = []
-    for i in selectionneur_de_date(date_a, date_b)[1]:
-        e = 6.112 * 10 * (7.5 * TEMP[i] / (237.7 + TEMP[i])) * HUMIDITY / 100
-        h = 5 / 9 * (e - 10.0)
-        indices_humidex.append(TEMP[i] + h)
-    return indices_humidex
-
-
 def etendue(L):
     return max(L) - min(L)
 
