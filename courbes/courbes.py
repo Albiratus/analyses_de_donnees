@@ -21,32 +21,32 @@ def traceur(date_debut, date_fin):
     plt.title("Temperature des bureaux entre le " + str(date_debut) + " et le " + str(date_fin))
     plt.xlabel = "temps en seconde"
     plt.ylabel = "Temperature en degre celsius"
-    plt.legend()
+
     plt.subplot(333)
     plt.plot(liste_tps, noise_choisi)
     plt.title(" niveau sonore des bureaux entre le " + str(date_debut) + " et le " + str(date_fin))
     plt.xlabel = "temps en seconde"
     plt.ylabel = "niveau sonore (dBA)"
-    plt.legend()
+
     plt.subplot(335)
     plt.plot(liste_tps, humidity_choisi)
     plt.title(" humidite relative des bureaux entre le " + str(date_debut) + " et le " + str(date_fin))
     plt.xlabel = "temps en seconde"
     plt.ylabel = " humidite relative (%)"
-    plt.legend()
+
     plt.subplot(337)
     plt.plot(liste_tps, lum_choisi)
     plt.title("niveau lumineux des bureaux entre le " + str(date_debut) + " et le " + str(date_fin))
     plt.xlabel = "temps en seconde"
     plt.ylabel = "niveau lumineux (lux)"
-    plt.legend()
+
     plt.subplot(339)
     plt.plot(liste_tps, c0_deux_choisi)
     plt.title("quantite de CO2 des bureaux entre le " + str(date_debut) + " et le " + str(date_fin))
     plt.xlabel = "temps en seconde"
     plt.ylabel = "quantite de CO2 (ppm)"
-    plt.legend()
+
     plt.show()
 
 
-traceur("2020-09-13 00:00:00", "2020-09-13 23:59:59")
+traceur("2019-08-13 00:00:00", "2019-08-13 23:59:59")

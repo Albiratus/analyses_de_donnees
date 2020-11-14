@@ -14,9 +14,7 @@ def selectionneur_de_date(date_a, date_b):
     indices = []
     #  on change les dates en nombre avec la methode du timestamp
     tps_a = mktime(datetime.strptime(date_a, "%Y-%m-%d %H:%M:%S").timetuple())
-    print(tps_a)
     tps_b = mktime(datetime.strptime(date_b, "%Y-%m-%d %H:%M:%S").timetuple())
-    print(tps_b)
     while temps_tries[c] < tps_a:
         #  determination de l'indice du tps a
         c += 1
@@ -30,3 +28,6 @@ def selectionneur_de_date(date_a, date_b):
         indices.append(i)
         #  on ne considere que les indices entre les dates a et b
     return liste_tps, indices
+
+
+

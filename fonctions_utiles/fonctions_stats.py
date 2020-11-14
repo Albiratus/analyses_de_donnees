@@ -1,8 +1,3 @@
-from fonctions_utiles.fonctions_selections import selectionneur_de_date
-from variables.variables import TEMP, HUMIDITY
-#  TEMP est la temperature triee de l'air en degre Celsius
-#  HUMIDITY est l'humidité relative triee
-
 
 def etendue(L):
     return max(L) - min(L)
