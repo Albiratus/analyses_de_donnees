@@ -1,4 +1,3 @@
-
 def etendue(L):
     return max(L) - min(L)
 

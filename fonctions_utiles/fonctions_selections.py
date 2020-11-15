@@ -28,6 +28,3 @@ def selectionneur_de_date(date_a, date_b):
         indices.append(i)
         #  on ne considere que les indices entre les dates a et b
     return liste_tps, indices
-
-
-
