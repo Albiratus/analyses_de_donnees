@@ -1,6 +1,6 @@
 #  importation des bibliotheques
 from time import mktime
-from time import strptime
+from time import strptime, localtime
 import csv
 from fonctions_utiles.fonctions_stats import tri_par_insertion_upgrade
 
@@ -42,3 +42,5 @@ for k in liste_indices_correspondantes:
     TEMP += [temp[k]]
     LUM += [lum[k]]
     HUMIDITY += [humidity[k]]
+
+

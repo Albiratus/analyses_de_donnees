@@ -11,4 +11,4 @@ def occupation(date_a, date_b):
     return horaires_occupe
 
 
-print(occupation("2019-08-13 00:00:00", "2019-08-13 23:59:59"))
+
