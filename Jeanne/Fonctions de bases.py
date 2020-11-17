@@ -43,11 +43,11 @@ def tri_insertion (liste):
         pos = i
 
 
-liste_vide = []
-#faire une liste avec les indices de départ
-for k in range (1, len(liste)-1):
-    append.k
-# mettre les indices de liste dans notre liste
+    liste_vide = []
+    #faire une liste avec les indices de départ
+    for k in range (1, len(liste)-1):
+        append.k
+    # mettre les indices de liste dans notre liste
 
 
 def mediane (l):
