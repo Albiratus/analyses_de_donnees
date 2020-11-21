@@ -1,3 +1,4 @@
+
 def minimum (liste):
     mini = liste [0]
     for i in liste :
@@ -31,23 +32,16 @@ def tri_rapide (liste):
         l1,l2 = [], []
         for x in liste :
             if x<pivot:
-                return l1.append(x)
+                l1.append(x)
             else:
-                return l2.append(x)
+                l2.append(x)
     return tri_rapide(l1)+[pivot]+tri_rapide(l2)
 
 
-def tri_insertion (liste):
+'''def tri_insertion (liste):
     for i in range (1, len(liste)):
-        vol = liste[i]
-        pos = i
-
-
-liste_vide = []
-#faire une liste avec les indices de départ
-for k in range (1, len(liste)-1):
-    append.k
-# mettre les indices de liste dans notre liste
+        val = liste[i]
+        pos = i'''
 
 
 def mediane (l):
@@ -101,7 +95,7 @@ plt.show()'''
 
 
 import csv
-with open ('projet.csv', 'r') as f :
+with open ('projet.csv', 'r') as f:
     reader = csv.reader(f, delimiter =';')
     donnees = []
     for row in reader :
@@ -115,16 +109,15 @@ lum = []
 CO2 = []
 date = []
 
-i = 0
-for row in donnees :
-    if i != 0 :
-        bruit.append(row[2])
-        temp.append(row[3])
-        humidite.append(row[4])
-        lum.append(row[5])
-        CO2.append(row[6])
-        date.append(row[7][0:19])
-    i = i + 1
+
+for row in range (1, len(donnees)) :
+        bruit.append(donnees[row][2])
+        temp.append(donnees[row][3])
+        humidite.append(donnees[row][4])
+        lum.append(donnees[row][5])
+        CO2.append(donnees[row][6])
+        date.append(donnees[row][7][0:19])
+
 
 from datetime import datetime
 
@@ -137,15 +130,71 @@ print(strptime('2000:09:22 06:36:45', '%Y:%m:%d %H:%M:%S'))
 
 print(datetime.strptime('2000:09:22 06:36:45', '%Y:%m:%d %H:%M:%S').time())
 
+
+
+# t = temprérature en °C.
+# d = dew point (point de rosée) en °C.
+import math
+
+def alpha(t, Phi):
+    a = 17,27
+    b = 237,7
+    return a*t/(b + t) + math.log(Phi)
+
+def point_rosee (t, Phi):
+    return b*alpha(t, Phi)/(a - alpha(t, Phi))
+
+def recherche_indice (instant):
+# instant = une heure (ex : 2020-09-12 22:00:00)
+    for k in range (0, len(liste_date)):
+        if liste_date[k] == instant:
+            return k
+
+def humidex (instant):
+
+    kelvin = 273,5
+    temperature = t2[recherche_indice(instant)] + kelvin
+    dewpoint = point_rosee(t2[recherche_indice(instant)], humidité[recherche_indice(instant)]) + kelvin
+# calcul la pression de la vapeur en mbar
+    e = 6,11*math.exp(5417.7530*((1/kelvin)-(1/dewpoint)))
+# calcul la pression de la vapeur saturante
+    h = 0,5555*(e - 10)
+    humidex = temperature + h - kelvin
+    return humidex
+
+
+
+def tri_insert (liste):
+    liste_indice = [0]
+    for k in range (1, len(liste)):
+        liste_indice.append(k)
+        a = k
+        while a>0 and liste[a-1]>liste[a]:
+            liste[a], liste[a-1]=liste[a-1], liste[a]
+            liste_indice[a], liste_indice[a-1]= liste_indice[a-1], liste_indice[a]
+            a -= 1
+    return liste, liste_indice
+
+print(tri_insert([6,5,4,3,2,1]))
+
+
+bruittri = []
+temptri = []
+humiditetri = []
+lumtri = []
+CO2tri = []
+datensectri = tri_insert(datensec)
+print(datensectri)
+
+
 import matplotlib.pyplot as plt
 
-plt.title("lumiere en fonction de la datensec")
-plt.plot(datensec, lum, "g--", linewidth = 2)
+plt.title("lumiere en fonction de la datensectri")
+plt.plot(datensectri, lum, "g--", linewidth = 2)
 plt.xlabel("date en sec")
 plt.ylabel("intensité lumière")
 plt.legend('lumière')
-plt.plot(datensec, bruit, "b--", linewidth = 2)
+plt.plot(datensectri, bruit, "b--", linewidth = 2)
 plt.legend('bruit')
-
 # pour montrer le graphique
 plt.show()
