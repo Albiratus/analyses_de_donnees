@@ -6,15 +6,7 @@ import matplotlib.pyplot as plt
 
 def transfo_heure(l):
 
-    a = str(localtime(l).tm_hour) + ":" + str(localtime(l).tm_min) + ":" + str(localtime(l).tm_sec)
-    if len(a)<8:
-        if a[0] > 2:
-            a=str(0)+a
-
-
-    a = str(localtime(l).tm_hour) + ":" + str(localtime(l).tm_min) + ":" + str(localtime(l).tm_sec)
-    return mktime(strptime("1970-01-01 "+a, "%Y-%m-%d %H:%M:%S"))
-
+    return localtime()
 
 def heure_max_extinction_bureau():
     horaire_max = []
@@ -55,3 +47,6 @@ for k in oublie_lumiere(LUM)[0]:
 plt.plot(tps_corrig,LUM)
 plt.scatter(tps_corrig,lumiere_corrigee,"color=red")
 plt.show()"""
+
+plt.plot([1,2,3],[1,3,2])
+plt.show()
