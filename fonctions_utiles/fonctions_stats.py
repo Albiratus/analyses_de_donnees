@@ -1,38 +1,91 @@
-def etendue(L):
-    return max(L) - min(L)
+def minimum(liste):
+    mini = liste[0]
+    for i in liste:
+        if i < mini:
+            i = mini
+    return mini
 
 
-def correlation(l1, l2):
-    m1 = moyenne(l1)
-    m2 = moyenne(l2)
-    v1 = variance(l1)
-    v2 = variance(l2)
-    s = 0
-    for i in range(len(l1)):
-        s += (l1[i] - m1) * (l2[i] - m2)
-    return s / (v1 * v2) ** (1 / 2)
+def maximum (liste):
+    maxi = liste[0]
+    for i in liste:
+        if i > maxi:
+            i = maxi
+    return maxi
 
 
-#  renvoie la liste des temps triees et la disposition sous forme de liste de ses indices apres le tri
-def tri_par_insertion_upgrade(liste):
-    #  retourne la liste triee et son ordre indiciel
-    li = []
-    for i in range(len(liste)):
-        li.append(i)
-        #  ordre non triee des indices de la liste des temps
-    for i in range(1, len(liste)):
-        j = i
-        while j > 0 and liste[j-1] > liste[j]:
-            liste[j-1], liste[j] = liste[j], liste[j-1]
-            #  on deplace 2 par 2 les elements des 2 listes
-            li[j-1], li[j] = li[j], li[j-1]
-            j -= 1
-    return liste, li
+def somme (liste):
+    _somme = 0
+    for i in liste:
+        _somme = _somme + float(i)
+    return _somme
 
 
-def moyenne_glissante(liste):
-    moyenne = []
-    for i in range(len(liste) - 1):
-        moyenne.append((liste[i] + liste[i + 1]) / 2.0)
-    moyenne.append((liste[-1]))
-    return moyenne
+def moyenne (liste):
+    a = len(liste)
+    moy = somme(liste)/a
+    return moy
+
+
+def tri_rapide (liste):
+    if liste == []:
+        return[]
+    else :
+        pivot = liste.pop()
+        l1,l2 = [], []
+        for x in liste :
+            if x<pivot:
+                return l1.append(x)
+            else:
+                return l2.append(x)
+    return tri_rapide(l1)+[pivot]+tri_rapide(l2)
+
+
+
+def mediane (l):
+    l=tri_rapide(l)
+    if len(l)<1 :
+        return None
+    else :
+        if len (l)%2 == 1 :
+            return (len(l)-1)/2
+        else :
+            a = [len(l)/2-1, len(l)/2]
+            return moyenne(a)
+
+
+def variance (liste):
+    a = moyenne(liste)
+    n = len (liste)
+    b = ((float(x) - a)**2 for x in liste)
+    var = somme (b)/n
+    return var
+
+
+def covariance (X, Y):
+    multiplication = []
+    # supposons que len(X) = len(Y)
+    for k in range (0, len(X)):
+        xmoinsespx = float(X[k])- moyenne(X)
+        ymoinsespy = float(Y[k])- moyenne(Y)
+        multiplication.append(xmoinsespx*ymoinsespy)
+    return moyenne (multiplication)
+
+
+def correlation (X, Y):
+    a = variance(X)
+    b = variance(Y)
+    c = covariance(X,Y)
+    return c/((a*b)**(1/2))
+
+
+def tri_insert (liste):
+    liste_indice = [0]
+    for k in range (1, len(liste)):
+        liste_indice.append(k)
+        a = k
+        while a>0 and liste[a-1]>liste[a]:
+            liste[a], liste[a-1]=liste[a-1], liste[a]
+            liste_indice[a], liste_indice[a-1]= liste_indice[a-1], liste_indice[a]
+            a -= 1
+    return liste, liste_indice

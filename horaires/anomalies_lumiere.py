@@ -7,14 +7,9 @@ import matplotlib.pyplot as plt
 
 def transfo_heure(nbre):
     b = localtime(nbre)
-    print(b)
     a = datetime.datetime(b.tm_year, b.tm_mon, b.tm_mday, b.tm_hour, b.tm_min, b.tm_sec)
-    print(a)
-    print("1970-01-01 " + str(a.time()))
-    print(strptime("1970-01-01 " + str(a.time()), "%Y-%m-%d %H:%M:%S"))
-    return mktime(strptime("1970-01-01 " + str(a.time()), "%Y-%m-%d %H:%M:%S"))
-print(transfo_heure(temps_tries[274]))
-print(transfo_heure(temps_tries[275]))
+    return nbre - mktime(strptime(str(a.date())+" 00:00:00", "%Y-%m-%d %H:%M:%S"))
+
 
 def heure_max_extinction_bureau():
     horaire_max = []
@@ -33,28 +28,29 @@ def heure_min_ouverture_bureau():
 
 
 def oublie_lumiere(l):
+    lumiere_corrig=[]
     indices_incorrectes = []
     a = heure_max_extinction_bureau()
     b = heure_min_ouverture_bureau()
     temps_heure = []
-
     for i in range(len(temps_tries)):
-        temps_heure. append((transfo_heure(temps_tries[i])))
-        print(len(temps_heure))
-        if temps_heure[0] > a or temps_heure[0] < b:
-
-            l[i] = 0
+        temps_heure.append((transfo_heure(temps_tries[i])))
+        lumiere_corrig.append(LUM[i])
+        if (temps_heure[i] > a or temps_heure[i] < b) and l[i] != 0:
             indices_incorrectes.append(i)
+            lumiere_corrig[i]=0
+    return indices_incorrectes,lumiere_corrig
 
-    return indices_incorrectes, l
-print(oublie_lumiere(LUM))
 
-lumiere_corrigee = oublie_lumiere(LUM)[1]
 tps_corrig = []
+point_lum_anomalique = []
 for k in oublie_lumiere(LUM)[0]:
     tps_corrig.append(temps_tries[k])
+    point_lum_anomalique.append(LUM[k])
 
+plt.subplot(211)
 plt.plot(temps_tries, LUM)
-plt.scatter(tps_corrig, lumiere_corrigee, "color=red")
+plt.scatter(tps_corrig, point_lum_anomalique, color='red')
+plt.subplot(212)
+plt.plot(temps_tries,oublie_lumiere(LUM)[1])
 plt.show()
-
