@@ -2,7 +2,7 @@
 from time import mktime
 from time import strptime
 import csv
-from fonctions_utiles.fonctions_stats import tri_insert
+from analyses_de_donnees.fonctions_utiles.fonctions_stats import tri_insert
 
 #  ouverture du fichier dans une liste "donnees
 donnees = []
