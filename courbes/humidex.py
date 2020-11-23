@@ -27,10 +27,9 @@ def recherche_indice(instant):
 
 
 def calcul_humidex(instant):
-    kelvin = 273.5
     temperature = TEMP[recherche_indice(instant)]
     humidite = HUMIDITY[recherche_indice(instant)]
-    dewpoint = point_rosee(temperature, humidite )
+    dewpoint = point_rosee(temperature, humidite)
 # calcul la pression de la vapeur en mbar
     e = 6.11*math.exp(5417.7530*((1/273.16)-1/(273.15-dewpoint)))
 # calcul la pression de la vapeur saturante
