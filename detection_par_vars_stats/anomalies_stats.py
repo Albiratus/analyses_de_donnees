@@ -1,5 +1,5 @@
-from analyses_de_donnees.fonctions_utiles.fonctions_stats import tri_insert
-from analyses_de_donnees.variables.variables import temps_tries, C0_DEUX
+from fonctions_utiles.fonctions_stats import tri_insert
+from variables.variables import temps_tries, C0_DEUX, LUM
 import matplotlib.pyplot as plt
 
 
@@ -36,9 +36,10 @@ def ejecter_anomalies (liste):
 def traceur_bonnes_valeurs (X):
     a = premierquartile(X)
     b = troisiemequartile(X)
-    plt.plot(temps_tries[a:b+1], ejecter_anomalies(X), label=str(X))
+    plt.scatter(temps_tries[a:b+1], ejecter_anomalies(X), label=str(X),color="red")
+    plt.plot(temps_tries,LUM)
     plt.legend('bonnes valeurs')
     plt.xlabel('datensec')
     plt.show()
 
-traceur_bonnes_valeurs(C0_DEUX)
+traceur_bonnes_valeurs(LUM)
