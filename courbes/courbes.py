@@ -35,7 +35,7 @@ def traceur(date_debut, date_fin):
     plt.xlabel = "temps en seconde"
     plt.ylabel = " humidite relative (%)"
     """
-    plt.scatter(liste_tps, lum_choisi)
+    plt.plot(liste_tps, lum_choisi)
     plt.title("niveau lumineux des bureaux entre le " + str(date_debut) + " et le " + str(date_fin))
     plt.xlabel = "temps en seconde"
     plt.ylabel = "niveau lumineux (lux)"
@@ -46,9 +46,10 @@ def traceur(date_debut, date_fin):
     plt.xlabel = "temps en seconde"
     plt.ylabel = "quantite de CO2 (ppm)"
     """
+    plt.show()
 
 
 traceur("2019-08-11 00:00:00", "2019-08-25 17:47:08")
-plt.show()
+
 
 

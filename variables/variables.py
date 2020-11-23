@@ -1,12 +1,13 @@
 #  importation des bibliotheques
 from time import mktime
-from time import strptime, localtime
+from time import strptime
 import csv
-from fonctions_utiles.fonctions_stats import tri_par_insertion_upgrade
+from fonctions_utiles.fonctions_stats import tri_insert
 
 #  ouverture du fichier dans une liste "donnees
 donnees = []
 #  creation d'une liste vide qui va recevoir les donnees du fichier csv
+
 fichier = csv.reader(open("EIVP_KM.csv"), delimiter=";")
 
 
@@ -35,7 +36,7 @@ for k in temps:
 
 #  tri des listes en fonctions de la liste du temps
 NOISE, TEMP, HUMIDITY, LUM, C0_DEUX = [], [], [], [], []
-temps_tries, liste_indices_correspondantes = tri_par_insertion_upgrade(temps_en_seconde)
+temps_tries, liste_indices_correspondantes = tri_insert(temps_en_seconde)
 for k in liste_indices_correspondantes:
     C0_DEUX += [co_deux[k]]
     NOISE += [noise[k]]
@@ -43,4 +44,6 @@ for k in liste_indices_correspondantes:
     LUM += [lum[k]]
     HUMIDITY += [humidity[k]]
 
-
+date_triee = []
+for k in tri_insert(temps_tries)[1]:
+    date_triee.append(temps[k])
