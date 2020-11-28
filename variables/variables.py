@@ -43,7 +43,7 @@ for k in temps:
 
 #  tri des listes en fonctions de la liste du temps
 NOISE, TEMP, HUMIDITY, LUM, C0_DEUX = [], [], [], [], []
-temps_tries, liste_indices_correspondantes = tri_insert(temps_en_seconde)
+temps_tries, liste_indices_correspondantes = tri_insert(temps_en_seconde)[0], tri_insert(temps_en_seconde)[1]
 for k in liste_indices_correspondantes:
     C0_DEUX += [co_deux[k]]
     NOISE += [noise[k]]

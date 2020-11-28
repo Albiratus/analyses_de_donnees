@@ -1,45 +1,51 @@
 from fonctions_utiles.fonctions_stats import tri_insert
-from variables.variables import temps_tries, C0_DEUX, LUM
-import matplotlib.pyplot as plt
 
 
+#  renvoie la valeur de l'indice du 3eme quartile
 def troisiemequartile(liste):
-    if len(liste)<1 :
+    if len(liste) < 1:
         return None
-    else :
-        if len(liste)%4 == 0 :
+    else:
+        if len(liste) % 4 == 0:
             a = 3*len(liste)/4 - 1
             return int(a)
-        else :
+        else:
             b = 3*(len(liste)/4)
-            return (int(b))
+            return int(b)
 
 
-def premierquartile (liste):
-    if len(liste)<1 :
+#  renvoie l'indice du 1er quartile
+def premierquartile(liste):
+    if len(liste) < 1:
         return None
-    else :
-        if len(liste)%4 == 0:
-            a = (len(liste))/4 -1
+    else:
+        if len(liste) % 4 == 0:
+            a = (len(liste))/4 - 1
             return int(a)
-        else :
+        else:
             b = len(liste)/4
             return int(b)
 
-def ejecter_anomalies (liste):
-    list = tri_insert(liste)
-    a = premierquartile(liste)
-    b = troisiemequartile(liste)
-    return(liste[a:b+1])
 
-
-def traceur_bonnes_valeurs (X):
-    a = premierquartile(X)
-    b = troisiemequartile(X)
-    plt.scatter(temps_tries[a:b+1], ejecter_anomalies(X), label=str(X),color="red")
-    plt.plot(temps_tries,LUM)
-    plt.legend('bonnes valeurs')
-    plt.xlabel('datensec')
-    plt.show()
-
-traceur_bonnes_valeurs(LUM)
+#  selectionne seulement les valeurs qui semblent coherentes et renvoies egalement les indices anormales
+def ejecter_anomalies(liste):
+    #  liste etant evidemment triee en fonction du temps
+    liste_sans_anomalies = []
+    indice_sans_anomalies = []
+    indices_anormales = []
+    #  tri de liste en fonction de ses valeurs
+    liste_triee = tri_insert(liste)[0]
+    valeur1quart = liste_triee[premierquartile(liste)]
+    valeur3quart = liste_triee[troisiemequartile(liste)]
+    ecart_inter_quart = valeur3quart - valeur1quart
+    #  determination des valeurs basses et hautes à garder
+    valeur_basse = valeur1quart - 1.5 * ecart_inter_quart
+    valeur_haute = valeur3quart + 1.5 * ecart_inter_quart
+    #  renvoie la liste entre les deux valeurs statistiques et les indices anormales
+    for k in range(len(liste)):
+        if valeur_basse <= liste[k] <= valeur_haute:
+            liste_sans_anomalies.append(liste[k])
+            indice_sans_anomalies.append(k)
+        else:
+            indices_anormales.append(k)
+    return liste_sans_anomalies, indices_anormales, indice_sans_anomalies
