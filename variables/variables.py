@@ -7,13 +7,20 @@ from fonctions_utiles.fonctions_stats import tri_insert
 #  ouverture du fichier dans une liste "donnees
 donnees = []
 #  creation d'une liste vide qui va recevoir les donnees du fichier csv
-
-fichier = csv.reader(open("EIVP_KM.csv"), delimiter=";")
-
+#  on verifie que le fichier soit valide
+while True:
+    try:
+        fichier = csv.reader(open(input("donnez le nom du fichier à ouvrir: ")), delimiter=";")
+        break
+    except FileNotFoundError:
+        print("le fichier n'est pas dans le repertoire")
+    except OSError:
+        print("le fichier n'a pu etre lu")
 
 #  extraction des données
 for k in fichier:
     donnees.append(k)
+
 temps, noise, temp, humidity, lum, co_deux = [], [], [], [], [], []
 #  creation de liste vide qui vont recevoir les colonnes du fichier
 for k in range(1, len(donnees)):
@@ -44,6 +51,7 @@ for k in liste_indices_correspondantes:
     LUM += [lum[k]]
     HUMIDITY += [humidity[k]]
 
+# tri des dates sous format "%Y-%m-%d %H:%M:S"
 date_triee = []
 for k in tri_insert(temps_tries)[1]:
     date_triee.append(temps[k])

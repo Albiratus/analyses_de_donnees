@@ -4,6 +4,7 @@ from time import localtime, asctime
 from horaires.anomalies_lumiere import oublie_lumiere
 
 
+#  donne sous forme de liste les moments ou le bureau est occupé durant une periode arbitraire
 def occupation(date_a, date_b):
     horaires_occupe = []
     for i in selectionneur_de_date(date_a, date_b)[1]:

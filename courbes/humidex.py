@@ -42,8 +42,18 @@ def tracer_humidex(date_a, date_b):
     humidex = []
     for k in selectionneur_de_date(date_a, date_b)[1]:
         humidex.append(calcul_humidex(date_triee[k]))
-    plt.scatter(selectionneur_de_date(date_a, date_b)[0], humidex)
+    plt.scatter(selectionneur_de_date(date_a, date_b)[0], humidex,"humidex entre "+str(date_a)+" et "+str(date_b))
+    plt.xlabel="temps en seconde"
+    plt.ylabel="indice humidex"
+    plt.legend()
     plt.show()
 
 
-tracer_humidex("2019-08-11 17:48:06", "2019-08-23 23:48:02")
+while True:
+    try:
+        tracer_humidex(input("donnez un instant exact sous forme (Y-m-d H:M:S): "), input("second instant: "))
+        break
+    except OSError:
+        print("instant(s) non défini")
+    except ValueError:
+        print("donnez des instants exact sous forme (Y-m-d H:M:S): ")
